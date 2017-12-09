@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AgenciaTurismo</string>
+    <string name="omitir">OMITIR</string>
+    <string name="start">INICIAR</string>
+    <string name="siguiente">SIGUIENTE</string>
+    <string name="instrucciones1">Encuentra las mejores promociones</string>
+    <string name="instrucciones2">Descubre los mejores Tours Locales</string>
+    <string name="instrucciones3">Descubre los mejores Tours Nacionales</string>
+    <string name="instrucciones4">Descubre los mejores Tours Internacionales</string>
+    <string name="instrucciones5">¡No te pierdas ninguna oferta!</string>
+</resources>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_login">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5">
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.2">
+        <LinearLayout
+            android:layout_gravity="center_vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.2">
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.2"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SUSCRIBIRSE"
+                    android:textColor="#f5a623"
+                    android:textSize="25sp"
+                    />
+
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/Tv_nombre"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar nombre"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
+                    android:inputType="text"
+                    android:autoSizeMaxTextSize="50sp"
+                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    />
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/Tv_correo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar correo"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
+                    android:inputType="text"
+                    android:autoSizeMaxTextSize="50sp"
+                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    />
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/Tv_pais"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar país"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
+                    android:inputType="text"
+                    android:autoSizeMaxTextSize="50sp"
+                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    />
+                <EditText
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/Tv_celular"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ingresar celular"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"
+                    android:inputType="text"
+                    android:autoSizeMaxTextSize="50sp"
+                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeStepGranularity="1sp"
+                    android:autoSizeTextType="uniform"
+                    android:textSize="14sp"
+                    />
+            </LinearLayout>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="0.5">
+    </RelativeLayout>
+
+
+</RelativeLayout>
