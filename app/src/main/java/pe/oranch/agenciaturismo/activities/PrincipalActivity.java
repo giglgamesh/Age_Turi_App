@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 import pe.oranch.agenciaturismo.R;
-
+//creado por daniel
 public class PrincipalActivity extends AppCompatActivity {
 
 
