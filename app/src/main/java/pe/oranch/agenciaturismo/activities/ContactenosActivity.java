@@ -43,26 +43,6 @@ public class ContactenosActivity extends AppCompatActivity {
     ScrollView scrollview01;
     //FIN REFRESH LAYOUT
 
-    //FUNCION PARA RETORNAR Y NO SALIR
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.app_name))
-                    .setMessage("Realmente desea salir?")
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            finish();
-                            System.exit(0);
-                        }})
-                    .setNegativeButton(android.R.string.no, null).show();
-        }
-        return true;
-    }
-    //FIN DE LA FUNCION
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

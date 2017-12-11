@@ -14,55 +14,56 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-
 import java.util.List;
 
-import pe.oranch.agenciaturismo.activities.ContactenosActivity;
+import pe.oranch.agenciaturismo.R;
+import pe.oranch.agenciaturismo.activities.ItemActivity;
 import pe.oranch.agenciaturismo.activities.SubmenuActivity;
 import pe.oranch.agenciaturismo.entidades.Tbl_menu;
-import pe.oranch.agenciaturismo.R;
+import pe.oranch.agenciaturismo.entidades.Tbl_sub_menu;
+
 import static pe.oranch.agenciaturismo.Config.APP_API_URL;
 
 /**
  * Created by Daniel on 15/11/2017.
  */
 
-public class Tbl_menuAdapter extends RecyclerView.Adapter<Tbl_menuAdapter.Tbl_menuHolder> {
-    List<Tbl_menu> listaMenu;
-    private Tbl_menuAdapter adaptador;
+public class Tbl_submenuAdapter extends RecyclerView.Adapter<Tbl_submenuAdapter.Tbl_submenuHolder> {
+    List<Tbl_sub_menu> listaSubMenu;
+    private Tbl_submenuAdapter adaptador;
     private Context mContext;
 
-    public Tbl_menuAdapter(Context context, List<Tbl_menu> listaMenu) {
-        this.listaMenu = listaMenu;
+    public Tbl_submenuAdapter(Context context, List<Tbl_sub_menu> listaSubMenu) {
+        this.listaSubMenu = listaSubMenu;
         this.mContext= context;
         this.adaptador = this;
     }
 
     @Override
-    public Tbl_menuAdapter.Tbl_menuHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View vista= LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_menu,parent,false);
+    public Tbl_submenuAdapter.Tbl_submenuHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View vista= LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_submenu,parent,false);
         RecyclerView.LayoutParams layoutParams=new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         vista.setLayoutParams(layoutParams);
-        return new Tbl_menuAdapter.Tbl_menuHolder(vista);
+        return new Tbl_submenuAdapter.Tbl_submenuHolder(vista);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onBindViewHolder(final Tbl_menuAdapter.Tbl_menuHolder holder, final int position) {
-        holder.menu_descripcion.setText(listaMenu.get(position).getTbl_menu_descripcion().toString());
-        for (int i=0;i<listaMenu.size();i++){
+    public void onBindViewHolder(final Tbl_submenuAdapter.Tbl_submenuHolder holder, final int position) {
+        holder.menu_descripcion.setText(listaSubMenu.get(position).getTbl_sub_menu_descripcion().toString());
+        for (int i=0;i<listaSubMenu.size();i++){
             String urlimagen;
-            urlimagen = APP_API_URL + (listaMenu.get(position).getTbl_menu_ruta().toString());
+            urlimagen = APP_API_URL + (listaSubMenu.get(position).getTbl_sub_menu_ruta().toString());
             Picasso.with(mContext).load(urlimagen).into(holder.imagenmenu);
         }
 
         holder.layoutmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentReg = new Intent(mContext,SubmenuActivity.class);
-                intentReg.putExtra("tbl_menu_id", listaMenu.get(position).getTbl_menu_id().toString());
-                intentReg.putExtra("tbl_menu_descripcion", listaMenu.get(position).getTbl_menu_descripcion().toString());
+                Intent intentReg = new Intent(mContext,ItemActivity.class);
+                intentReg.putExtra("tbl_sub_menu_id", listaSubMenu.get(position).getTbl_sub_menu_id().toString());
+                intentReg.putExtra("tbl_sub_menu_descripcion", listaSubMenu.get(position).getTbl_sub_menu_descripcion().toString());
                 mContext.startActivity(intentReg);
             }
         });
@@ -70,14 +71,14 @@ public class Tbl_menuAdapter extends RecyclerView.Adapter<Tbl_menuAdapter.Tbl_me
 
     @Override
     public int getItemCount() {
-        return listaMenu.size();
+        return listaSubMenu.size();
     }
 
-    public class Tbl_menuHolder extends RecyclerView.ViewHolder{
+    public class Tbl_submenuHolder extends RecyclerView.ViewHolder{
         LinearLayout layoutmenu;
         TextView menu_descripcion;
         ImageView imagenmenu;
-        public Tbl_menuHolder(View itemView) {
+        public Tbl_submenuHolder(View itemView) {
             super(itemView);
             menu_descripcion = (TextView) itemView.findViewById(R.id.menu_Descripcion);
             imagenmenu = (ImageView) itemView.findViewById(R.id.imagenMenu);

@@ -21,6 +21,7 @@
             android:layout_weight="1">
         </RelativeLayout>
         <LinearLayout
+            android:id="@+id/layoutMenu"
             android:orientation="horizontal"
             android:layout_weight="0.10"
             android:elevation="10dp"

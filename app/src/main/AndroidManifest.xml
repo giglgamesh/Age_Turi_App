@@ -26,6 +26,8 @@
         <activity android:name=".activities.TutorialActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.PrincipalActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.ContactenosActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.SubmenuActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.ItemActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

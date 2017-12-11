@@ -1,22 +1,21 @@
 package pe.oranch.agenciaturismo.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,46 +29,31 @@ import java.util.ArrayList;
 
 import pe.oranch.agenciaturismo.BottomNavigationViewHelper;
 import pe.oranch.agenciaturismo.R;
-import pe.oranch.agenciaturismo.adapter.Tbl_menuAdapter;
-import pe.oranch.agenciaturismo.entidades.Tbl_menu;
-import pe.oranch.agenciaturismo.request.ListarMenuRequest;
+import pe.oranch.agenciaturismo.adapter.Tbl_itemAdapter;
+import pe.oranch.agenciaturismo.adapter.Tbl_submenuAdapter;
+import pe.oranch.agenciaturismo.entidades.Tbl_item;
+import pe.oranch.agenciaturismo.entidades.Tbl_sub_menu;
+import pe.oranch.agenciaturismo.request.ListarItemRequest;
+import pe.oranch.agenciaturismo.request.ListarSubMenuRequest;
 
 //creado por daniel
-public class PrincipalActivity extends AppCompatActivity {
+public class ItemActivity extends AppCompatActivity {
     RecyclerView idrecyclerlista;
+    TextView activitytitulo;
+    RelativeLayout layoutbotonVolver;
     //LISTA DEL MENU
-    ArrayList<Tbl_menu> listaMenu;
+    ArrayList<Tbl_item> listaItem;
     //PARA EL REFRESH LAYOUT
     SwipeRefreshLayout swipeRefreshLayout;
     ScrollView scrollview01;
     //FIN REFRESH LAYOUT
 
-    //FUNCION PARA RETORNAR Y NO SALIR
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.app_name))
-                    .setMessage("Realmente desea salir?")
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            finish();
-                            System.exit(0);
-                        }})
-                    .setNegativeButton(android.R.string.no, null).show();
-        }
-        return true;
-    }
-    //FIN DE LA FUNCION
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_principal);
+        setContentView(R.layout.activity_submenu);
         iniciarObjetos();
-        obtenerMenu();
+        obtenerSubMenu();
         iniciarBotMenu();
     }
     private void iniciarObjetos() {
@@ -106,6 +90,20 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
         //FIN REFRESH
+        activitytitulo = (TextView) findViewById(R.id.activityTitulo);
+        Intent intentdatos = getIntent();
+        final String titulo = intentdatos.getStringExtra("tbl_sub_menu_descripcion");
+        activitytitulo.setText(titulo);
+        //boton volver funcionalidad
+        layoutbotonVolver = (RelativeLayout) findViewById(R.id.botonVolver);
+        layoutbotonVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentRegP = new Intent(ItemActivity.this,PrincipalActivity.class);
+                ItemActivity.this.startActivity(intentRegP);
+            }
+        });
+        //fin boton volver
     }
 
     private void iniciarBotMenu(){
@@ -124,8 +122,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
                         break;
                     case R.id.ic_oferta:
-                        Intent intentReg = new Intent(PrincipalActivity.this,ContactenosActivity.class);
-                        PrincipalActivity.this.startActivity(intentReg);
+                        Intent intentReg = new Intent(ItemActivity.this,ContactenosActivity.class);
+                        ItemActivity.this.startActivity(intentReg);
                         break;
                 }
                 return false;
@@ -134,42 +132,48 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void actualizarItems(){
-        obtenerMenu();
+        obtenerSubMenu();
     }
 
-    private void obtenerMenu() {
-        final int estado = 1;
+    private void obtenerSubMenu() {
+        Intent intentdatos = getIntent();
+        final int submenu = Integer.parseInt(intentdatos.getStringExtra("tbl_sub_menu_id"));
 
         Response.Listener<String> responseListenerLista = new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
-                    listaMenu = new ArrayList<>();
+                    listaItem = new ArrayList<>();
                     idrecyclerlista = findViewById(R.id.idRecyclerLista);
-                    idrecyclerlista.setLayoutManager(new LinearLayoutManager(PrincipalActivity.this));
+                    idrecyclerlista.setLayoutManager(new LinearLayoutManager(ItemActivity.this));
                     idrecyclerlista.setHasFixedSize(true);
 
                     JSONObject jsonReponse = new JSONObject(response);
-                    Tbl_menu tbl_menu=null;
+                    Tbl_item tbl_item=null;
                     JSONArray json=jsonReponse.optJSONArray("usuario");
                     for (int i=0;i<json.length();i++){
-                        tbl_menu=new Tbl_menu();
+                        tbl_item=new Tbl_item();
                         JSONObject jsonObject=null;
                         jsonObject=json.getJSONObject(i);
-                        tbl_menu.setTbl_menu_id(Integer.parseInt(jsonObject.optString("tbl_menu_id")));
-                        tbl_menu.setTbl_menu_descripcion(jsonObject.optString("tbl_menu_descripcion"));
-                        tbl_menu.setTbl_menu_ruta(jsonObject.optString("tbl_menu_ruta"));
-                        listaMenu.add(tbl_menu);
+                        tbl_item.setTbl_item_titulo(jsonObject.optString("tbl_item_titulo"));
+                        tbl_item.setTbl_item_subtitulo(jsonObject.optString("tbl_item_subtitulo"));
+                        tbl_item.setTbl_item_des_subtitulo(jsonObject.optString("tbl_item_des_subtitulo"));
+                        tbl_item.setTbl_item_des_corta(jsonObject.optString("tbl_item_des_corta"));
+                        tbl_item.setTbl_item_des_precio(jsonObject.optString("tbl_item_des_precio"));
+                        tbl_item.setTbl_item_precio(Double.parseDouble(jsonObject.optString("tbl_item_precio")));
+                        tbl_item.setTbl_detalle_id(Integer.parseInt(jsonObject.optString("tbl_detalle_id")));
+                        tbl_item.setTbl_item_ruta(jsonObject.optString("tbl_item_ruta"));
+                        listaItem.add(tbl_item);
                     }
-                    Tbl_menuAdapter adapter=new Tbl_menuAdapter(PrincipalActivity.this,listaMenu);
+                    Tbl_itemAdapter adapter=new Tbl_itemAdapter(ItemActivity.this,listaItem);
                     idrecyclerlista.setAdapter(adapter);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
             }
         };
-        ListarMenuRequest listarmenuRequest = new ListarMenuRequest(estado,responseListenerLista);
-        RequestQueue queue = Volley.newRequestQueue(PrincipalActivity.this);
-        queue.add(listarmenuRequest);
+        ListarItemRequest listaritemRequest = new ListarItemRequest(submenu,responseListenerLista);
+        RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
+        queue.add(listaritemRequest);
     }
 }
