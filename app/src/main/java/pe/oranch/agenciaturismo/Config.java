@@ -12,4 +12,5 @@ public class Config extends Application{
     public static final String LISTAR_MENU = "ListarMenu.php";
     public static final String LISTAR_SUBMENU = "ListarSubMenu.php";
     public static final String LISTAR_ITEM = "ListarItem.php";
+    public static final String LISTAR_OFERTA = "ListarOferta.php";
 }

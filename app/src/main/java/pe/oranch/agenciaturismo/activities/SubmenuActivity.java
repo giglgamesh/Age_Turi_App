@@ -125,6 +125,13 @@ public class SubmenuActivity extends AppCompatActivity {
 
                         break;
                     case R.id.ic_oferta:
+                        Intent intentReg2 = new Intent(SubmenuActivity.this,OfertaActivity.class);
+                        SubmenuActivity.this.startActivity(intentReg2);
+                        break;
+                    case R.id.ic_nosotros:
+
+                        break;
+                    case R.id.ic_contactenos:
                         Intent intentReg = new Intent(SubmenuActivity.this,ContactenosActivity.class);
                         SubmenuActivity.this.startActivity(intentReg);
                         break;

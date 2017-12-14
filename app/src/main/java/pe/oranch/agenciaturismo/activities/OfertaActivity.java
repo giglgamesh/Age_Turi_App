@@ -1,19 +1,14 @@
 package pe.oranch.agenciaturismo.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewTreeObserver;
@@ -23,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,51 +28,39 @@ import java.util.ArrayList;
 
 import pe.oranch.agenciaturismo.BottomNavigationViewHelper;
 import pe.oranch.agenciaturismo.R;
-import pe.oranch.agenciaturismo.adapter.Tbl_menuAdapter;
-import pe.oranch.agenciaturismo.entidades.Tbl_menu;
-import pe.oranch.agenciaturismo.request.ListarMenuRequest;
+import pe.oranch.agenciaturismo.adapter.Tbl_ofertaAdapter;
+import pe.oranch.agenciaturismo.entidades.Tbl_oferta;
+import pe.oranch.agenciaturismo.request.ListarOfertaRequest;
 import pe.oranch.agenciaturismo.utilities.Utils;
 
 //creado por daniel
-public class PrincipalActivity extends AppCompatActivity {
+public class OfertaActivity extends AppCompatActivity {
     RecyclerView idrecyclerlista;
     //LISTA DEL MENU
-    ArrayList<Tbl_menu> listaMenu;
+    ArrayList<Tbl_oferta> listaOferta;
     //PARA EL REFRESH LAYOUT
     SwipeRefreshLayout swipeRefreshLayout;
     ScrollView scrollview01;
     //FIN REFRESH LAYOUT
+    //fragmento y firebase
+    private FirebaseAnalytics mFirebaseAnalytics;
+    //fin fragmento y firebase
 
-
-    //FUNCION PARA RETORNAR Y NO SALIR
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            new AlertDialog.Builder(this)
-                    .setTitle(getResources().getString(R.string.app_name))
-                    .setMessage("Realmente desea salir?")
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int whichButton) {
-                            finish();
-                            System.exit(0);
-                        }})
-                    .setNegativeButton(android.R.string.no, null).show();
-        }
-        return true;
-    }
-    //FIN DE LA FUNCION
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_principal);
+        setContentView(R.layout.activity_oferta);
+        obtenerOfertas();
         iniciarObjetos();
-        obtenerMenu();
+        initUtils();
         iniciarBotMenu();
+        FirebaseMessaging.getInstance().subscribeToTopic("AgenciaTurismo");
     }
-
+    private void initUtils() {
+        new Utils(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+    }
     private void iniciarObjetos() {
         idrecyclerlista = (RecyclerView) findViewById(R.id.idRecyclerLista);
         //INICIALIZAR REFRESH LAYOUT
@@ -118,7 +102,7 @@ public class PrincipalActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem= menu.getItem(0);
+        MenuItem menuItem= menu.getItem(1);
         menuItem.setChecked(true);
         //FIN NAVEGADOR
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -126,62 +110,61 @@ public class PrincipalActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_home:
-
+                        Intent intentReg = new Intent(OfertaActivity.this,PrincipalActivity.class);
+                        OfertaActivity.this.startActivity(intentReg);
                         break;
                     case R.id.ic_oferta:
-                        Intent intentReg2 = new Intent(PrincipalActivity.this,OfertaActivity.class);
-                        PrincipalActivity.this.startActivity(intentReg2);
+
                         break;
                     case R.id.ic_nosotros:
 
                         break;
                     case R.id.ic_contactenos:
-                        Intent intentReg = new Intent(PrincipalActivity.this,ContactenosActivity.class);
-                        PrincipalActivity.this.startActivity(intentReg);
+                        Intent intentReg4 = new Intent(OfertaActivity.this,ContactenosActivity.class);
+                        OfertaActivity.this.startActivity(intentReg4);
                         break;
                 }
                 return false;
             }
         });
     }
-
     private void actualizarItems(){
-        obtenerMenu();
+        obtenerOfertas();
     }
 
-    private void obtenerMenu() {
+    private void obtenerOfertas() {
         final int estado = 1;
 
         Response.Listener<String> responseListenerLista = new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
-                    listaMenu = new ArrayList<>();
+                    listaOferta = new ArrayList<>();
                     idrecyclerlista = findViewById(R.id.idRecyclerLista);
-                    idrecyclerlista.setLayoutManager(new LinearLayoutManager(PrincipalActivity.this));
+                    idrecyclerlista.setLayoutManager(new LinearLayoutManager(OfertaActivity.this));
                     idrecyclerlista.setHasFixedSize(true);
 
                     JSONObject jsonReponse = new JSONObject(response);
-                    Tbl_menu tbl_menu=null;
+                    Tbl_oferta tbl_oferta=null;
                     JSONArray json=jsonReponse.optJSONArray("usuario");
                     for (int i=0;i<json.length();i++){
-                        tbl_menu=new Tbl_menu();
+                        tbl_oferta=new Tbl_oferta();
                         JSONObject jsonObject=null;
                         jsonObject=json.getJSONObject(i);
-                        tbl_menu.setTbl_menu_id(Integer.parseInt(jsonObject.optString("tbl_menu_id")));
-                        tbl_menu.setTbl_menu_descripcion(jsonObject.optString("tbl_menu_descripcion"));
-                        tbl_menu.setTbl_menu_ruta(jsonObject.optString("tbl_menu_ruta"));
-                        listaMenu.add(tbl_menu);
+                        tbl_oferta.setTbl_oferta_titulo(jsonObject.optString("tbl_oferta_titulo"));
+                        tbl_oferta.setTbl_oferta_descripcion(jsonObject.optString("tbl_oferta_descripcion"));
+                        tbl_oferta.setTbl_oferta_cantidad(jsonObject.optString("tbl_oferta_cantidad"));
+                        listaOferta.add(tbl_oferta);
                     }
-                    Tbl_menuAdapter adapter=new Tbl_menuAdapter(PrincipalActivity.this,listaMenu);
+                    Tbl_ofertaAdapter adapter=new Tbl_ofertaAdapter(OfertaActivity.this,listaOferta);
                     idrecyclerlista.setAdapter(adapter);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
             }
         };
-        ListarMenuRequest listarmenuRequest = new ListarMenuRequest(estado,responseListenerLista);
-        RequestQueue queue = Volley.newRequestQueue(PrincipalActivity.this);
-        queue.add(listarmenuRequest);
+        ListarOfertaRequest listarofertaRequest = new ListarOfertaRequest(estado,responseListenerLista);
+        RequestQueue queue = Volley.newRequestQueue(OfertaActivity.this);
+        queue.add(listarofertaRequest);
     }
 }

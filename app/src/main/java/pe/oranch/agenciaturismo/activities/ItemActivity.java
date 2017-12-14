@@ -99,8 +99,7 @@ public class ItemActivity extends AppCompatActivity {
         layoutbotonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentRegP = new Intent(ItemActivity.this,PrincipalActivity.class);
-                ItemActivity.this.startActivity(intentRegP);
+                onBackPressed();
             }
         });
         //fin boton volver
@@ -122,6 +121,13 @@ public class ItemActivity extends AppCompatActivity {
 
                         break;
                     case R.id.ic_oferta:
+                        Intent intentReg2 = new Intent(ItemActivity.this,OfertaActivity.class);
+                        ItemActivity.this.startActivity(intentReg2);
+                        break;
+                    case R.id.ic_nosotros:
+
+                        break;
+                    case R.id.ic_contactenos:
                         Intent intentReg = new Intent(ItemActivity.this,ContactenosActivity.class);
                         ItemActivity.this.startActivity(intentReg);
                         break;

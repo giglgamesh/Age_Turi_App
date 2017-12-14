@@ -20,6 +20,8 @@ import android.widget.ScrollView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,19 +31,15 @@ import java.util.ArrayList;
 
 import pe.oranch.agenciaturismo.BottomNavigationViewHelper;
 import pe.oranch.agenciaturismo.R;
-import pe.oranch.agenciaturismo.adapter.Tbl_menuAdapter;
 import pe.oranch.agenciaturismo.entidades.Tbl_menu;
-import pe.oranch.agenciaturismo.request.ListarMenuRequest;
 
 //creado por daniel
 public class ContactenosActivity extends AppCompatActivity {
     RecyclerView idrecyclerlista;
-    //LISTA DEL MENU
-    ArrayList<Tbl_menu> listaMenu;
-    //PARA EL REFRESH LAYOUT
     SwipeRefreshLayout swipeRefreshLayout;
     ScrollView scrollview01;
     //FIN REFRESH LAYOUT
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +57,7 @@ public class ContactenosActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
-        MenuItem menuItem= menu.getItem(1);
+        MenuItem menuItem= menu.getItem(3);
         menuItem.setChecked(true);
         //FIN NAVEGADOR
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,6 +69,13 @@ public class ContactenosActivity extends AppCompatActivity {
                         ContactenosActivity.this.startActivity(intentReg);
                         break;
                     case R.id.ic_oferta:
+                        Intent intentReg2 = new Intent(ContactenosActivity.this,OfertaActivity.class);
+                        ContactenosActivity.this.startActivity(intentReg2);
+                        break;
+                    case R.id.ic_nosotros:
+
+                        break;
+                    case R.id.ic_contactenos:
 
                         break;
                 }

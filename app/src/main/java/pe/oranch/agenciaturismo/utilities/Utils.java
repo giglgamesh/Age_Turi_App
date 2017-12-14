@@ -1,17 +1,26 @@
 package pe.oranch.agenciaturismo.utilities;
 
+import android.content.Context;
 import android.text.SpannableString;
 import android.util.Log;
+
+import pe.oranch.agenciaturismo.activities.ContactenosActivity;
+import pe.oranch.agenciaturismo.activities.OfertaActivity;
+import pe.oranch.agenciaturismo.activities.PrincipalActivity;
 
 /**
  * Created by Daniel on 05/11/2017.
  */
 
 public class Utils {
-
+    public static OfertaActivity activity;
     private static SpannableString spannableString;
     public static void psLog(String log){
         Log.d("TEAMPS", log);
+    }
+
+    public Utils(Context context){
+        this.activity = (OfertaActivity) context;
     }
     public static void psErrorLogE(String log, Exception e) {
         try {
