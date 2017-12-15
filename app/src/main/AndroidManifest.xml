@@ -30,6 +30,7 @@
         <activity android:name=".activities.SubmenuActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.ItemActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <activity android:name=".activities.OfertaActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
+        <activity android:name=".activities.ItemDescripcionActivity" android:windowSoftInputMode="adjustPan" android:screenOrientation="portrait"></activity>
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />

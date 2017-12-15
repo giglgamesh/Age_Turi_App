@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,20 +31,26 @@ import java.util.ArrayList;
 
 import pe.oranch.agenciaturismo.BottomNavigationViewHelper;
 import pe.oranch.agenciaturismo.R;
+import pe.oranch.agenciaturismo.adapter.Tbl_descripcionAdapter;
 import pe.oranch.agenciaturismo.adapter.Tbl_itemAdapter;
 import pe.oranch.agenciaturismo.adapter.Tbl_submenuAdapter;
+import pe.oranch.agenciaturismo.entidades.Tbl_descripcion;
 import pe.oranch.agenciaturismo.entidades.Tbl_item;
 import pe.oranch.agenciaturismo.entidades.Tbl_sub_menu;
+import pe.oranch.agenciaturismo.request.ListarDescripcionRequest;
 import pe.oranch.agenciaturismo.request.ListarItemRequest;
 import pe.oranch.agenciaturismo.request.ListarSubMenuRequest;
 
+import static pe.oranch.agenciaturismo.Config.APP_API_URL;
+
 //creado por daniel
-public class ItemActivity extends AppCompatActivity {
+public class ItemDescripcionActivity extends AppCompatActivity {
     RecyclerView idrecyclerlista;
-    TextView activitytitulo;
+    TextView activitytitulo, item_descripcionsubtitulo, item_precio;
+    ImageView imagenmenu;
     RelativeLayout layoutbotonVolver;
     //LISTA DEL MENU
-    ArrayList<Tbl_item> listaItem;
+    ArrayList<Tbl_descripcion> listaDescripcion;
     //PARA EL REFRESH LAYOUT
     SwipeRefreshLayout swipeRefreshLayout;
     ScrollView scrollview01;
@@ -51,28 +59,18 @@ public class ItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_submenu);
+        setContentView(R.layout.activity_item_descripcion);
         iniciarObjetos();
-        obtenerSubMenu();
+        obtenerItemDescripcion();
         iniciarBotMenu();
     }
     private void iniciarObjetos() {
         idrecyclerlista = (RecyclerView) findViewById(R.id.idRecyclerLista);
         //INICIALIZAR REFRESH LAYOUT
-        scrollview01 = findViewById(R.id.ScrollView01);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.simpleSwipeRefreshLayout);
         //FIN REFRESH LAYOUT
         //REFRESH
-        scrollview01.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
 
-            @Override
-            public void onScrollChanged() {
-                int scrollY = scrollview01.getScrollY();
-                if(scrollY == 0) swipeRefreshLayout.setEnabled(true);
-                else swipeRefreshLayout.setEnabled(false);
-
-            }
-        });
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -90,19 +88,32 @@ public class ItemActivity extends AppCompatActivity {
             }
         });
         //FIN REFRESH
+        //Obtener datos Titulo
         activitytitulo = (TextView) findViewById(R.id.activityTitulo);
         Intent intentdatos = getIntent();
-        final String titulo = intentdatos.getStringExtra("tbl_sub_menu_descripcion");
+        final String titulo = intentdatos.getStringExtra("tbl_item_titulo");
         activitytitulo.setText(titulo);
-        //boton volver funcionalidad
-        layoutbotonVolver = (RelativeLayout) findViewById(R.id.botonVolver);
-        layoutbotonVolver.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-        //fin boton volver
+        //Fin Obtener datos Titulo
+        //Obtener datos SubTitulo
+        item_descripcionsubtitulo = (TextView) findViewById(R.id.item_DescripcionSubtitulo);
+        Intent intentdesc= getIntent();
+        final String desc = intentdesc.getStringExtra("tbl_item_des_corta");
+        item_descripcionsubtitulo.setText(desc);
+        //FIN Obtener datos SubTitulo
+        //Obtener datos Precio
+        item_precio = (TextView) findViewById(R.id.item_Precio);
+        Intent intentprec= getIntent();
+        final String prec = intentprec.getStringExtra("tbl_item_des_precio");
+        item_precio.setText(prec);
+        //FIN Obtener datos Precio
+        //Obtener datos Imagen
+        imagenmenu = (ImageView) findViewById(R.id.imagenMenu);
+        Intent intenturl= getIntent();
+        final String url = intenturl.getStringExtra("tbl_item_ruta");
+        String urlimagen;
+        urlimagen = APP_API_URL + url;
+        Picasso.with(ItemDescripcionActivity.this).load(urlimagen).into(imagenmenu);
+        //FIN Obtener datos Precio
     }
 
     private void iniciarBotMenu(){
@@ -121,15 +132,15 @@ public class ItemActivity extends AppCompatActivity {
 
                         break;
                     case R.id.ic_oferta:
-                        Intent intentReg2 = new Intent(ItemActivity.this,OfertaActivity.class);
-                        ItemActivity.this.startActivity(intentReg2);
+                        Intent intentReg2 = new Intent(ItemDescripcionActivity.this,OfertaActivity.class);
+                        ItemDescripcionActivity.this.startActivity(intentReg2);
                         break;
                     case R.id.ic_nosotros:
 
                         break;
                     case R.id.ic_contactenos:
-                        Intent intentReg = new Intent(ItemActivity.this,ContactenosActivity.class);
-                        ItemActivity.this.startActivity(intentReg);
+                        Intent intentReg = new Intent(ItemDescripcionActivity.this,ContactenosActivity.class);
+                        ItemDescripcionActivity.this.startActivity(intentReg);
                         break;
                 }
                 return false;
@@ -138,49 +149,42 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void actualizarItems(){
-        obtenerSubMenu();
+        obtenerItemDescripcion();
     }
 
-    private void obtenerSubMenu() {
+    private void obtenerItemDescripcion() {
         Intent intentdatos = getIntent();
-        final int submenu = Integer.parseInt(intentdatos.getStringExtra("tbl_sub_menu_id"));
+        final int submenu = Integer.parseInt(intentdatos.getStringExtra("tbl_item_id"));
 
         Response.Listener<String> responseListenerLista = new Response.Listener<String>(){
             @Override
             public void onResponse(String response) {
                 try {
-                    listaItem = new ArrayList<>();
+                    listaDescripcion = new ArrayList<>();
                     idrecyclerlista = findViewById(R.id.idRecyclerLista);
-                    idrecyclerlista.setLayoutManager(new LinearLayoutManager(ItemActivity.this));
+                    idrecyclerlista.setLayoutManager(new LinearLayoutManager(ItemDescripcionActivity.this));
                     idrecyclerlista.setHasFixedSize(true);
 
                     JSONObject jsonReponse = new JSONObject(response);
-                    Tbl_item tbl_item=null;
+                    Tbl_descripcion tbl_descripcion=null;
                     JSONArray json=jsonReponse.optJSONArray("usuario");
                     for (int i=0;i<json.length();i++){
-                        tbl_item=new Tbl_item();
+                        tbl_descripcion=new Tbl_descripcion();
                         JSONObject jsonObject=null;
                         jsonObject=json.getJSONObject(i);
-                        tbl_item.setTbl_item_id(Integer.parseInt(jsonObject.optString("tbl_item_id")));
-                        tbl_item.setTbl_item_titulo(jsonObject.optString("tbl_item_titulo"));
-                        tbl_item.setTbl_item_subtitulo(jsonObject.optString("tbl_item_subtitulo"));
-                        tbl_item.setTbl_item_des_subtitulo(jsonObject.optString("tbl_item_des_subtitulo"));
-                        tbl_item.setTbl_item_des_corta(jsonObject.optString("tbl_item_des_corta"));
-                        tbl_item.setTbl_item_des_precio(jsonObject.optString("tbl_item_des_precio"));
-                        tbl_item.setTbl_item_precio(Double.parseDouble(jsonObject.optString("tbl_item_precio")));
-                        tbl_item.setTbl_detalle_id(Integer.parseInt(jsonObject.optString("tbl_detalle_id")));
-                        tbl_item.setTbl_item_ruta(jsonObject.optString("tbl_item_ruta"));
-                        listaItem.add(tbl_item);
+                        tbl_descripcion.setTbl_descripcion_titulo(jsonObject.optString("tbl_descripcion_titulo"));
+                        tbl_descripcion.setTbl_descripcion_contenido(jsonObject.optString("tbl_descripcion_contenido"));
+                        listaDescripcion.add(tbl_descripcion);
                     }
-                    Tbl_itemAdapter adapter=new Tbl_itemAdapter(ItemActivity.this,listaItem);
+                    Tbl_descripcionAdapter adapter=new Tbl_descripcionAdapter(ItemDescripcionActivity.this,listaDescripcion);
                     idrecyclerlista.setAdapter(adapter);
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
             }
         };
-        ListarItemRequest listaritemRequest = new ListarItemRequest(submenu,responseListenerLista);
-        RequestQueue queue = Volley.newRequestQueue(ItemActivity.this);
-        queue.add(listaritemRequest);
+        ListarDescripcionRequest listardescripcionRequest = new ListarDescripcionRequest(submenu,responseListenerLista);
+        RequestQueue queue = Volley.newRequestQueue(ItemDescripcionActivity.this);
+        queue.add(listardescripcionRequest);
     }
 }

@@ -1,6 +1,7 @@
 package pe.oranch.agenciaturismo.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import pe.oranch.agenciaturismo.R;
+import pe.oranch.agenciaturismo.activities.ItemActivity;
+import pe.oranch.agenciaturismo.activities.ItemDescripcionActivity;
 import pe.oranch.agenciaturismo.entidades.Tbl_item;
 import pe.oranch.agenciaturismo.entidades.Tbl_sub_menu;
 
@@ -64,6 +67,13 @@ public class Tbl_itemAdapter extends RecyclerView.Adapter<Tbl_itemAdapter.Tbl_it
                 //Intent intentReg = new Intent(mContext,SubmenuActivity.class);
                 //intentReg.putExtra("tbl_menu_id", listaSubMenu.get(position).getTbl_sub_menu_id().toString());
                 //mContext.startActivity(intentReg);
+                Intent intentReg = new Intent(mContext,ItemDescripcionActivity.class);
+                intentReg.putExtra("tbl_item_id", listaItem.get(position).getTbl_item_id().toString());
+                intentReg.putExtra("tbl_item_titulo", listaItem.get(position).getTbl_item_titulo().toString());
+                intentReg.putExtra("tbl_item_des_corta", listaItem.get(position).getTbl_item_des_corta().toString());
+                intentReg.putExtra("tbl_item_des_precio", listaItem.get(position).getTbl_item_des_precio().toString());
+                intentReg.putExtra("tbl_item_ruta", listaItem.get(position).getTbl_item_ruta().toString());
+                mContext.startActivity(intentReg);
             }
         });
     }
