@@ -1,37 +1,22 @@
 package pe.oranch.agenciaturismo.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
+import android.view.View;
 import android.widget.ScrollView;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.messaging.FirebaseMessaging;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 import pe.oranch.agenciaturismo.BottomNavigationViewHelper;
 import pe.oranch.agenciaturismo.R;
-import pe.oranch.agenciaturismo.entidades.Tbl_menu;
 
 //creado por daniel
 public class ContactenosActivity extends AppCompatActivity {
@@ -82,5 +67,9 @@ public class ContactenosActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void EnviarCorreo(View view) {
+
     }
 }

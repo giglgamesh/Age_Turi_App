@@ -146,7 +146,8 @@
                                     android:layout_width="fill_parent"
                                     android:layout_height="fill_parent"
                                     android:textColor="@color/colorBlanco"
-                                    android:text="Enviar"/>
+                                    android:text="Enviar"
+                                    android:onClick="EnviarCorreo"/>
                             </RelativeLayout>
                         </LinearLayout>
                         <RelativeLayout
