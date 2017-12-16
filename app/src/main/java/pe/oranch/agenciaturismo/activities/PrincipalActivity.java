@@ -133,7 +133,8 @@ public class PrincipalActivity extends AppCompatActivity {
                         PrincipalActivity.this.startActivity(intentReg2);
                         break;
                     case R.id.ic_nosotros:
-
+                        Intent intentReg3 = new Intent(PrincipalActivity.this,NosotrosActivity.class);
+                        PrincipalActivity.this.startActivity(intentReg3);
                         break;
                     case R.id.ic_contactenos:
                         Intent intentReg = new Intent(PrincipalActivity.this,ContactenosActivity.class);

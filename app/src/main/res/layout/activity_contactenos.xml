@@ -76,6 +76,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent">
                                 <EditText
+                                    android:id="@+id/nombre_Correo"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="text"
@@ -91,6 +92,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent">
                                 <EditText
+                                    android:id="@+id/telefono_Correo"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="number"
@@ -106,6 +108,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent">
                                 <EditText
+                                    android:id="@+id/correo_Persona"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="textEmailAddress"
@@ -121,6 +124,7 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent">
                                 <EditText
+                                    android:id="@+id/mensaje_Correo"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
                                     android:inputType="textMultiLine"

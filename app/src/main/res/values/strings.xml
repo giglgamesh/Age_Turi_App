@@ -9,4 +9,12 @@
     <string name="instrucciones4">Descubre los mejores Tours Internacionales</string>
     <string name="instrucciones5">¡No te pierdas ninguna oferta!</string>
     <string name="btn_volver">Volver</string>
+    <string name="nombre_correo">¡Ingresa tu nombre!</string>
+    <string name="telefono_correo">¡No olvides tu teléfono!</string>
+    <string name="correo_persona">¡Ingresa tu correo para responderte!</string>
+    <string name="mensaje_correo">¡No te olvides el mensaje!</string>
+    <string name="OK">¡Todo correcto!</string>
+    <string name="device_offline">¡Te encuentras sin internet!</string>
+    <string name="sorry_title">Contactenos</string>
+    <string name="mensaje_pais">¡No te olvides el pais!</string>
 </resources>

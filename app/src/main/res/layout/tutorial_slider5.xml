@@ -2,115 +2,179 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondo_login">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="pe.oranch.agenciaturismo.activities.TutorialActivity">
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
-    </RelativeLayout>
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.2">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_gravity="center_vertical"
+            android:layout_above="@+id/relLayoutBot"
+            android:orientation="vertical"
+            android:background="@drawable/avionesblanco"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="horizontal"
-            android:layout_weight="0.2">
+            android:layout_height="fill_parent">
             <RelativeLayout
+                android:layout_weight="1"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="fill_parent">
             </RelativeLayout>
             <LinearLayout
+                android:layout_weight="0.3"
+                android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.2"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SUSCRIBIRSE"
-                    android:textColor="#f5a623"
-                    android:textSize="25sp"
-                    />
+                android:layout_height="fill_parent">
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                </RelativeLayout>
+                <LinearLayout
+                    android:elevation="10dp"
+                    android:background="@color/colorBlanco"
+                    android:layout_weight="0.3"
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1">
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.15">
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1">
+                        </RelativeLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_weight="0.15"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Suscribete"
+                                    android:autoSizeMaxTextSize="50sp"
+                                    android:autoSizeMinTextSize="16sp"
+                                    android:autoSizeStepGranularity="1sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:textSize="16sp"/>
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
 
-                <EditText
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/Tv_nombre"
+                                <EditText
+                                    android:id="@+id/nombre_Persona"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginBottom="15dp"
+                                    android:autoSizeMaxTextSize="50sp"
+                                    android:autoSizeMinTextSize="14sp"
+                                    android:autoSizeStepGranularity="1sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:hint="Nombre"
+                                    android:inputType="text"
+                                    android:textSize="14sp" />
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                                <EditText
+                                    android:id="@+id/telefono_Persona"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="number"
+                                    android:hint="Teléfono"
+                                    android:autoSizeMaxTextSize="50sp"
+                                    android:autoSizeMinTextSize="14sp"
+                                    android:autoSizeStepGranularity="1sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:textSize="14sp"/>
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                                <EditText
+                                    android:id="@+id/correo_Persona"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="textEmailAddress"
+                                    android:hint="Email"
+                                    android:autoSizeMaxTextSize="50sp"
+                                    android:autoSizeMinTextSize="14sp"
+                                    android:autoSizeStepGranularity="1sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:textSize="14sp"/>
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_weight="0.9"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                                <EditText
+                                    android:id="@+id/pais_Persona"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="País de origen"
+                                    android:autoSizeMaxTextSize="50sp"
+                                    android:autoSizeMinTextSize="14sp"
+                                    android:autoSizeStepGranularity="1sp"
+                                    android:autoSizeTextType="uniform"
+                                    android:textSize="14sp"/>
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_weight="1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                                <Button
+                                    android:elevation="10dp"
+                                    android:background="@drawable/boton_logueo_facebook"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:textColor="@color/colorBlanco"
+                                    android:text="Enviar"
+                                    android:onClick="EnviarSuscribete"/>
+                            </RelativeLayout>
+                        </LinearLayout>
+                        <RelativeLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_weight="1">
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1">
+                    </RelativeLayout>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_weight="1"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ingresar nombre"
-                    android:textColorHint="#FFFFFF"
-                    android:textColor="#FFFFFF"
-                    android:inputType="text"
-                    android:autoSizeMaxTextSize="50sp"
-                    android:autoSizeMinTextSize="14sp"
-                    android:autoSizeStepGranularity="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:textSize="14sp"
-                    />
-                <EditText
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/Tv_correo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ingresar correo"
-                    android:textColorHint="#FFFFFF"
-                    android:textColor="#FFFFFF"
-                    android:inputType="text"
-                    android:autoSizeMaxTextSize="50sp"
-                    android:autoSizeMinTextSize="14sp"
-                    android:autoSizeStepGranularity="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:textSize="14sp"
-                    />
-                <EditText
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/Tv_pais"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ingresar país"
-                    android:textColorHint="#FFFFFF"
-                    android:textColor="#FFFFFF"
-                    android:inputType="text"
-                    android:autoSizeMaxTextSize="50sp"
-                    android:autoSizeMinTextSize="14sp"
-                    android:autoSizeStepGranularity="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:textSize="14sp"
-                    />
-                <EditText
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/Tv_celular"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Ingresar celular"
-                    android:textColorHint="#FFFFFF"
-                    android:textColor="#FFFFFF"
-                    android:inputType="text"
-                    android:autoSizeMaxTextSize="50sp"
-                    android:autoSizeMinTextSize="14sp"
-                    android:autoSizeStepGranularity="1sp"
-                    android:autoSizeTextType="uniform"
-                    android:textSize="14sp"
-                    />
+                    android:layout_height="fill_parent">
+                </RelativeLayout>
             </LinearLayout>
             <RelativeLayout
+                android:layout_weight="1"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1">
+                android:layout_height="fill_parent">
             </RelativeLayout>
         </LinearLayout>
-
-    </ScrollView>
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5">
     </RelativeLayout>
-
-
 </RelativeLayout>
