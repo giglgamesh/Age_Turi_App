@@ -46,10 +46,10 @@
                     android:textColor="@color/colorBlanco"
                     android:layout_centerVertical="true"
                     android:autoSizeMaxTextSize="50sp"
-                    android:autoSizeMinTextSize="14sp"
+                    android:autoSizeMinTextSize="12sp"
                     android:autoSizeStepGranularity="1sp"
                     android:autoSizeTextType="uniform"
-                    android:textSize="14sp"/>
+                    android:textSize="12sp"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"

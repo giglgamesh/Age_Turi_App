@@ -117,7 +117,8 @@ public class OfertaActivity extends AppCompatActivity {
 
                         break;
                     case R.id.ic_nosotros:
-
+                        Intent intentReg3 = new Intent(OfertaActivity.this,NosotrosActivity.class);
+                        OfertaActivity.this.startActivity(intentReg3);
                         break;
                     case R.id.ic_contactenos:
                         Intent intentReg4 = new Intent(OfertaActivity.this,ContactenosActivity.class);

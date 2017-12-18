@@ -69,7 +69,8 @@ public class ContactenosActivity extends AppCompatActivity {
                         ContactenosActivity.this.startActivity(intentReg2);
                         break;
                     case R.id.ic_nosotros:
-
+                        Intent intentReg3 = new Intent(ContactenosActivity.this,NosotrosActivity.class);
+                        ContactenosActivity.this.startActivity(intentReg3);
                         break;
                     case R.id.ic_contactenos:
 

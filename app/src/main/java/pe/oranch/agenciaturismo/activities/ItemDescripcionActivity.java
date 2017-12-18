@@ -136,7 +136,8 @@ public class ItemDescripcionActivity extends AppCompatActivity {
                         ItemDescripcionActivity.this.startActivity(intentReg2);
                         break;
                     case R.id.ic_nosotros:
-
+                        Intent intentReg3 = new Intent(ItemDescripcionActivity.this,NosotrosActivity.class);
+                        ItemDescripcionActivity.this.startActivity(intentReg3);
                         break;
                     case R.id.ic_contactenos:
                         Intent intentReg = new Intent(ItemDescripcionActivity.this,ContactenosActivity.class);
