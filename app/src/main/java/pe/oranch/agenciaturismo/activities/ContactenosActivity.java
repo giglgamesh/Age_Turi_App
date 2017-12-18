@@ -93,7 +93,7 @@ public class ContactenosActivity extends AppCompatActivity {
                 correo = correo_persona.getText().toString();
                 mensaje = mensaje_correo.getText().toString();
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"denrique1628@gmail.com"});
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"worldinternationaltcq@gmail.com"});
                 //emailIntent.putExtra(Intent.EXTRA_BCC, new String[]{"email3@ekiketa.es"});
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Agencia APP: "+nombre);
                 //Recordad que la barra invertida más "n" es un salto de linea "n" así, escribiremos el email con varios saltos de linea.
