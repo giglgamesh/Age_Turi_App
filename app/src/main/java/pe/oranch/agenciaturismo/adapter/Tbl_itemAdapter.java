@@ -60,7 +60,6 @@ public class Tbl_itemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             vh = new Tbl_itemAdapter.Tbl_itemHolder(vista);
         }else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.progress_item, parent, false);
-
             vh = new Tbl_itemAdapter.ProgressViewHolder(v);
         }
         return vh;
@@ -69,7 +68,7 @@ public class Tbl_itemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if(holder instanceof Tbl_menuAdapter.Tbl_menuHolder) {
+        if(holder instanceof Tbl_itemHolder) {
             ((Tbl_itemHolder)holder).item_titulo.setText(listaItem.get(position).getTbl_item_titulo().toString());
             ((Tbl_itemHolder)holder).item_subtitulo.setText(listaItem.get(position).getTbl_item_subtitulo().toString());
             ((Tbl_itemHolder)holder).item_descripcionsubtitulo.setText(listaItem.get(position).getTbl_item_des_subtitulo().toString());
