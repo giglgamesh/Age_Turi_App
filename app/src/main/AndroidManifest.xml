@@ -36,6 +36,10 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyAXHjxA2wGYdsggySjlG0Ywc3m5Y6oxFpw" />
+
         <service
             android:name="pe.oranch.agenciaturismo.utilities.FirebaseMessagingService"
             android:enabled="true"

@@ -17,6 +17,7 @@
             android:layout_alignParentTop="true">
             //TITULO SUPERIOR Y BOTON
             <RelativeLayout
+                android:elevation="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:id="@+id/relLayoutTop2"

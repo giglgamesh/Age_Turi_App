@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -18,7 +19,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import pe.oranch.agenciaturismo.BottomNavigationViewHelper;
 import pe.oranch.agenciaturismo.R;
@@ -26,25 +38,86 @@ import pe.oranch.agenciaturismo.utilities.Utils;
 
 //creado por daniel
 public class NosotrosActivity extends AppCompatActivity {
-    private CollapsingToolbarLayout collapsingToolbar;
-
+    private MapView mMapView;
+    private TextView aboutwebsite;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nosotros);
         iniciarObjetos();
         iniciarBotMenu();
-        initCollapsingToolbarLayout();
+        initilizeMap(savedInstanceState);
+        bindShopInfo();
     }
-    private void initCollapsingToolbarLayout(){
-        try {
-            collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-            //collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
-        } catch (Exception e) {
-            Utils.psErrorLogE("Error in initCollapsingToolbarLayout.", e);
+
+    private void iniciarObjetos() {
+        aboutwebsite = (TextView) findViewById(R.id.about_website);
+        aboutwebsite.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                final Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(aboutwebsite.getText().toString()));
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void initilizeMap(Bundle savedInstanceState) {
+        if (Utils.isGooglePlayServicesOK(this)) {
+            mMapView = (MapView) findViewById(R.id.mapView);
+            mMapView.onCreate(savedInstanceState);
+            mMapView.onResume();
+            try {
+                MapsInitializer.initialize(getApplicationContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-    private void iniciarObjetos() {
+    private void bindShopInfo() {
+
+        try {
+            mMapView.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+                    googleMap.getUiSettings().setZoomControlsEnabled(false);
+
+
+                    double latitude = -18.0136869;
+                    double longitude = -70.2525957;
+
+                    MarkerOptions marker = new MarkerOptions().position(new LatLng( latitude, longitude)).title("World International");
+                    marker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(
+                            new LatLng(latitude, longitude)).zoom(15.1f).build();
+
+                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),new GoogleMap.CancelableCallback() {
+                        @Override
+                        public void onFinish() {
+
+                            Utils.psLog("Finish Camera update.");
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            Utils.psLog("Cancel Camera update.");
+                        }
+                    });
+
+
+                    googleMap.addMarker(marker);
+                }
+            });
+
+        } catch (Exception e) {
+            Utils.psErrorLogE("Error in map initialize.", e);
+        }
 
     }
 
