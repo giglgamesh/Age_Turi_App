@@ -1,8 +1,11 @@
 package pe.oranch.agenciaturismo.activities;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -14,10 +17,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +45,7 @@ import pe.oranch.agenciaturismo.utilities.Utils;
 //creado por daniel
 public class NosotrosActivity extends AppCompatActivity {
     private MapView mMapView;
-    private TextView aboutwebsite;
+    private ImageView facebook,twitter,youtube,whatsapp,instagram;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,20 +57,94 @@ public class NosotrosActivity extends AppCompatActivity {
     }
 
     private void iniciarObjetos() {
-        aboutwebsite = (TextView) findViewById(R.id.about_website);
-        aboutwebsite.setOnClickListener(new View.OnClickListener()
-        {
+        facebook = (ImageView) findViewById(R.id.about_website);
+        facebook.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                final Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse(aboutwebsite.getText().toString()));
-                startActivity(intent);
+            public void onClick(View v) {
+                String facebookId = "fb://page/845310668961255";
+                String urlPage = "https://www.facebook.com/World.International.Tacna/";
+
+                try {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(facebookId )));
+                } catch (Exception e) {
+                    //Abre url de pagina.
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlPage)));
+                }
             }
         });
+        whatsapp = (ImageView) findViewById(R.id.whatsapp_link);
+        whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String smsNumber = "+51932121621";
+                boolean isWhatsappInstalled = whatsappInstalledOrNot("com.whatsapp");
+                if (isWhatsappInstalled) {
 
+                    Intent sendIntent = new Intent("android.intent.action.MAIN");
+                    sendIntent.setComponent(new ComponentName("com.whatsapp", "com.whatsapp.Conversation"));
+                    sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(smsNumber) + "@s.whatsapp.net");//phone number without "+" prefix
+                    startActivity(sendIntent);
+                } else {
+                    Uri uri = Uri.parse("market://details?id=com.whatsapp");
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    Toast.makeText(NosotrosActivity.this, "WhatsApp no esta instalado", Toast.LENGTH_SHORT).show();
+                    startActivity(goToMarket);
+                }
+            }
+        });
+        instagram = (ImageView) findViewById(R.id.instagram_link);
+        instagram.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(newInstagramProfileIntent(NosotrosActivity.this.getPackageManager(), "http://www.instagram.com/world_international_tcq"));
+            }
+        });
+        twitter = (ImageView) findViewById(R.id.twitter_link);
+        twitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = null;
+                try {
+                    // get the Twitter app if possible
+                    NosotrosActivity.this.getPackageManager().getPackageInfo("com.twitter.android", 0);
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("twitter://user?user_id=937024243098968065"));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                } catch (Exception e) {
+                    // no Twitter app, revert to browser
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/WorldInterTcq"));
+                }
+                NosotrosActivity.this.startActivity(intent);
+            }
+        });
+    }
+    public static Intent newInstagramProfileIntent(PackageManager pm, String url) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        try {
+            if (pm.getPackageInfo("com.instagram.android", 0) != null) {
+                if (url.endsWith("/")) {
+                    url = url.substring(0, url.length() - 1);
+                }
+                final String username = url.substring(url.lastIndexOf("/") + 1);
+                // http://stackoverflow.com/questions/21505941/intent-to-open-instagram-user-profile-on-android
+                intent.setData(Uri.parse("http://instagram.com/_u/" + username));
+                intent.setPackage("com.instagram.android");
+                return intent;
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        intent.setData(Uri.parse(url));
+        return intent;
+    }
+    private boolean whatsappInstalledOrNot(String uri) {
+        PackageManager pm = getPackageManager();
+        boolean app_installed = false;
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed;
     }
     private void initilizeMap(Bundle savedInstanceState) {
         if (Utils.isGooglePlayServicesOK(this)) {

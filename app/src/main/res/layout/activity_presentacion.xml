@@ -17,12 +17,51 @@
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
             android:src="@drawable/splash_screen" />
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="100dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/logo_wi"
-            />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="130dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/logo_wi"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlanco"
+                android:textStyle="bold"
+                android:text="World"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="18sp"
+                android:autoSizeMaxTextSize="50sp"
+                android:textSize="18sp"
+                android:autoSizeStepGranularity="1sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlanco"
+                android:textStyle="bold"
+                android:text="International"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="18sp"
+                android:autoSizeMaxTextSize="50sp"
+                android:textSize="18sp"
+                android:autoSizeStepGranularity="1sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlanco"
+                android:text="Agencia de viajes y turismo"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMaxTextSize="50sp"
+                android:textSize="12sp"
+                android:autoSizeStepGranularity="1sp"/>
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

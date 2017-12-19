@@ -148,7 +148,7 @@
                                     android:layout_marginTop="8dp"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp"
-                                    android:text="Dirección y ubicación"
+                                    android:text="Av. San Martin 331 Int. 11"
                                     android:layout_gravity="center_horizontal"
                                     android:autoSizeTextType="uniform"
                                     android:autoSizeMinTextSize="12sp"
@@ -178,7 +178,7 @@
                                     android:layout_marginTop="8dp"
                                     android:paddingLeft="8dp"
                                     android:paddingRight="8dp"
-                                    android:text="932121621 - 958703818"
+                                    android:text="052281065 - 052281245"
                                     android:layout_gravity="center_horizontal"
                                     android:autoSizeTextType="uniform"
                                     android:autoSizeMinTextSize="12sp"
@@ -192,29 +192,41 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
-                                android:layout_marginLeft="16dp"
-                                android:layout_marginTop="16dp">
+                                android:layout_marginLeft="11dp">
 
                                 <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:tint="@color/colorNegro"
-                                    android:src="@drawable/ic_web_black"
-                                    />
-                                <TextView
                                     android:id="@+id/about_website"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:paddingLeft="8dp"
-                                    android:paddingRight="8dp"
-                                    android:text="https://www.fb.com/World.International.Tacna/"
-                                    android:layout_gravity="center_horizontal"
-                                    android:autoSizeTextType="uniform"
-                                    android:autoSizeMinTextSize="12sp"
-                                    android:autoSizeMaxTextSize="50sp"
-                                    android:textSize="12sp"
-                                    android:autoSizeStepGranularity="1sp"
+                                    android:src="@drawable/ic_facebook"
+                                    android:layout_margin="5dp"
+                                    />
+                                <ImageView
+                                    android:id="@+id/instagram_link"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_instagram"
+                                    android:layout_margin="5dp"
+                                    />
+                                <ImageView
+                                    android:id="@+id/twitter_link"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_twitter"
+                                    android:layout_margin="5dp"
+                                    />
+                                <ImageView
+                                    android:id="@+id/whatsapp_link"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_whatsapp"
+                                    android:layout_margin="5dp"
+                                    />
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_youtube"
+                                    android:layout_margin="5dp"
                                     />
                             </LinearLayout>
                         </LinearLayout>
