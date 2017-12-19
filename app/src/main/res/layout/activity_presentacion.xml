@@ -29,6 +29,7 @@
                 android:background="@drawable/logo_wi"
                 />
             <TextView
+                android:id="@+id/titulo_splash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlanco"
@@ -40,6 +41,7 @@
                 android:textSize="18sp"
                 android:autoSizeStepGranularity="1sp"/>
             <TextView
+                android:id="@+id/subtitulo_splash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlanco"
@@ -51,6 +53,7 @@
                 android:textSize="18sp"
                 android:autoSizeStepGranularity="1sp"/>
             <TextView
+                android:id="@+id/descripcion_splash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlanco"

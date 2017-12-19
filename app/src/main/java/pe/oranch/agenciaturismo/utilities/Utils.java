@@ -3,6 +3,7 @@ package pe.oranch.agenciaturismo.utilities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.util.Log;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import pe.oranch.agenciaturismo.activities.PrincipalActivity;
  */
 
 public class Utils {
+    private static Typeface fromAsset;
+    private static Fonts currentTypeface;
     public static OfertaActivity activity;
     private static SpannableString spannableString;
     public static void psLog(String log){
@@ -59,5 +62,34 @@ public class Utils {
             Toast.makeText(activity, "Can't connect to Google Play services", Toast.LENGTH_SHORT).show();
         }
         return false;
+    }
+    public static Typeface getTypeFace(Fonts fonts) {
+
+        if(currentTypeface == fonts) {
+            if (fromAsset == null) {
+                if(fonts == Fonts.NOTO_SANS) {
+                    fromAsset = Typeface.createFromAsset(activity.getAssets(), "fonts/NotoSans-Regular.ttf");
+                }else if(fonts == Fonts.NUNITO){
+                    fromAsset = Typeface.createFromAsset(activity.getAssets(), "fonts/NUNITO-REGULAR.ttf");
+                }
+            }
+        }else{
+            if(fonts == Fonts.NOTO_SANS){
+                fromAsset = Typeface.createFromAsset(activity.getAssets(), "fonts/NotoSans-Regular.ttf");
+            }else if(fonts == Fonts.NUNITO){
+                fromAsset = Typeface.createFromAsset(activity.getAssets(), "fonts/NUNITO-REGULAR.ttf");
+            }else{
+                fromAsset = Typeface.createFromAsset(activity.getAssets(), "fonts/NUNITO-REGULAR.ttf");
+            }
+
+            //fromAsset = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Italic.ttf");
+            currentTypeface = fonts;
+        }
+        return fromAsset;
+    }
+    public enum Fonts{
+        ROBOTO,
+        NOTO_SANS,
+        NUNITO
     }
 }
