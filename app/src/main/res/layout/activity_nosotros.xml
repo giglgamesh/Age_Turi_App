@@ -75,7 +75,6 @@
                     android:layout_width="15dp"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/relLayoutBordeSuperior"
-                    android:layout_above="@+id/relLayoutBordeInferior"
                     android:layout_alignParentRight="true"
                     android:id="@+id/relLayoutDer">
 

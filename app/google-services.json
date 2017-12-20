@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "870466099633",
-    "firebase_url": "https://agenciaturismo-c2d77.firebaseio.com",
-    "project_id": "agenciaturismo-c2d77",
-    "storage_bucket": "agenciaturismo-c2d77.appspot.com"
+    "project_number": "844420275463",
+    "firebase_url": "https://flyappbeta2.firebaseio.com",
+    "project_id": "flyappbeta2",
+    "storage_bucket": "flyappbeta2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:870466099633:android:1803790ede4f13c0",
+        "mobilesdk_app_id": "1:844420275463:android:1803790ede4f13c0",
         "android_client_info": {
           "package_name": "pe.oranch.agenciaturismo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "870466099633-elckei2fe750m2e11igujls4fpr6smkt.apps.googleusercontent.com",
+          "client_id": "844420275463-t2v1rt1fvhlqbev41sva21n2b4va6tui.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCw0ymFoCi8Bt99DPc_h6GA9TOvVPi_T_Y"
+          "current_key": "AIzaSyAeTz0-Tw1OtQV4uLr15acOUa514WV-VWs"
         }
       ],
       "services": {

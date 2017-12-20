@@ -10,7 +10,7 @@
         <LinearLayout
             android:layout_above="@+id/relLayoutBot"
             android:orientation="vertical"
-            android:background="@drawable/avionesblanco"
+            android:background="@drawable/tapiz_nuevo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
             <RelativeLayout
