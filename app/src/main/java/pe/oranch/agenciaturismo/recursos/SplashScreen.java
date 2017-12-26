@@ -51,11 +51,11 @@ public class SplashScreen extends Activity {
         timer.schedule(task, SPLASH_SCREEN_DELAY);
     }
     public void iniciarobjetos(){
-        titulo = (TextView) findViewById(R.id.titulo_splash);
-        titulo.setTypeface(Utils.getTypeFace(Utils.Fonts.NUNITO));
-        subtitulo = (TextView) findViewById(R.id.subtitulo_splash);
-        subtitulo.setTypeface(Utils.getTypeFace(Utils.Fonts.NUNITO));
-        descripcion = (TextView) findViewById(R.id.descripcion_splash);
-        descripcion.setTypeface(Utils.getTypeFace(Utils.Fonts.NUNITO));
+        //titulo = (TextView) findViewById(R.id.titulo_splash);
+        //titulo.setTypeface(Utils.getTypeFace(Utils.Fonts.NUNITO));
+        //subtitulo = (TextView) findViewById(R.id.subtitulo_splash);
+        //subtitulo.setTypeface(Utils.getTypeFace(Utils.Fonts.NUNITO));
+        //descripcion = (TextView) findViewById(R.id.descripcion_splash);
+        //descripcion.setTypeface(Utils.getTypeFace(Utils.Fonts.NUNITO));
     }
 }

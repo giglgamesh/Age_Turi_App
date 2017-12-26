@@ -191,6 +191,36 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:tint="@color/colorNegro"
+                                    android:src="@drawable/ic_local_phone_black"
+                                    />
+                                <TextView
+                                    android:id="@+id/celulares"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:paddingLeft="8dp"
+                                    android:paddingRight="8dp"
+                                    android:text="932121601 - 944600881"
+                                    android:layout_gravity="center_horizontal"
+                                    android:autoSizeTextType="uniform"
+                                    android:autoSizeMinTextSize="12sp"
+                                    android:autoSizeMaxTextSize="50sp"
+                                    android:textSize="12sp"
+                                    android:autoSizeStepGranularity="1sp"
+                                    />
+                            </LinearLayout>
+                            <include layout="@layout/ui_line"/>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
                                 android:layout_marginLeft="11dp">
 
                                 <ImageView
@@ -222,6 +252,7 @@
                                     android:layout_margin="5dp"
                                     />
                                 <ImageView
+                                    android:id="@+id/youtube_link"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/ic_youtube"

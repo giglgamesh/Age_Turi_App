@@ -116,6 +116,15 @@ public class NosotrosActivity extends AppCompatActivity {
                 NosotrosActivity.this.startActivity(intent);
             }
         });
+        youtube = (ImageView) findViewById(R.id.youtube_link);
+        youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://www.youtube.com/channel/UClnxedUNjiG6q3p9DNWOqmg?view_as=subscriber");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
     }
     public static Intent newInstagramProfileIntent(PackageManager pm, String url) {
         final Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -86,20 +86,13 @@
                     <ImageView
                         android:id="@+id/imagenMenu"
                         android:layout_width="fill_parent"
-                        android:src="@drawable/oferta"
-                        android:layout_height="fill_parent" />
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/ic_oferta_wi" />
                     <LinearLayout
-                        android:layout_marginTop="25dp"
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="fill_parent">
                         <RelativeLayout
-                            android:layout_weight="0.8"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_weight="0.5"
                             android:gravity="center"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent">
@@ -111,15 +104,10 @@
                                 android:textColor="@color/colorBlanco"
                                 android:text="S/. 50"
                                 android:autoSizeMaxTextSize="50sp"
-                                android:autoSizeMinTextSize="15sp"
+                                android:autoSizeMinTextSize="19sp"
                                 android:autoSizeStepGranularity="1sp"
                                 android:autoSizeTextType="uniform"
-                                android:textSize="15sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_weight="1"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent">
+                                android:textSize="19sp"/>
                         </RelativeLayout>
                     </LinearLayout>
                 </RelativeLayout>
